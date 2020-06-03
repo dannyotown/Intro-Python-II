@@ -6,4 +6,4 @@ class Player:
         self.name = name
 
     def __str__(self):
-        return f"{self.room}"
+        return f"{self.name}, you are now at {self.room}"
