@@ -1,7 +1,13 @@
 from room import Room
+from item import Item
 from player import Player
 
 # Declare all the rooms
+
+items = {
+    "sword": Item('Sword', 'Sharp word, helps Fight off the bad guys.'),
+    "dagger": Item('Dagger', 'Small dagger, helps fight off the bad guys.')
+}
 
 room = {
     'outside':  Room("Outside Cave Entrance",
@@ -50,7 +56,7 @@ room['treasure'].s_to = room['narrow']
 #     print('You Cannot Go This Direction')
 
 player_name = input('Please Enter Your Name:')
-player1 = Player(room['outside'], player_name)
+player1 = Player(room['outside'], player_name, items['sword'])
 while True:
     try:
         print(player1)
