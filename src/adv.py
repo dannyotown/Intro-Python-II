@@ -53,38 +53,44 @@ room['treasure'].s_to = room['narrow']
 # if(where_to == 'n'):
 #     player1.room = room['outside'].n_to
 # else:
-#     print('You Cannot Go This Direction')
+#     print('You Cannot Go This command')
 
 player_name = input('Please Enter Your Name:')
 player1 = Player(room['outside'], player_name, items['sword'])
 while True:
     try:
         print(player1)
-        direction = input(
-            '[n] for north, [s] for south, [e] for east, [w] for west, [q] to exit:').lower()
-        if direction == 'q':
+        command = input(
+            '[n] for north, [s] for south, [e] for east, [w] for west, [f] to drop item, [t] to pick up item, [q] to exit:').lower()
+        if command == 'q':
             print('Thanks For Playing')
             break
-        elif direction == 'n':
+        if command == 'f':
+            player1.room.add_items_to_room(items['sword'])
+            player1.remove_items(items['sword'])
+        if command == 't':
+            player1.room.remove_items_in_room(items['sword'])
+            player1.add_items(items['sword'])
+        elif command == 'n':
             if hasattr(player1.room, 'n_to'):
                 player1.room = player1.room.n_to
             else:
-                print('you cannot move this direction')
-        elif direction == 'e':
+                print('you cannot move with this command')
+        elif command == 'e':
             if hasattr(player1.room, 'e_to'):
                 player1.room = player1.room.e_to
             else:
-                print('you cannot move this direction')
-        elif direction == 's':
+                print('you cannot move with this command')
+        elif command == 's':
             if hasattr(player1.room, 's_to'):
                 player1.room = player1.room.s_to
             else:
-                print('you cannot move this direction')
-        elif direction == 'w':
+                print('you cannot move with this command')
+        elif command == 'w':
             if hasattr(player1.room, 'w_to'):
                 player1.room = player1.room.w_to
             else:
-                print('you cannot move this direction')
+                print('you cannot move this command')
     except ValueError:
         print('Error')
 
@@ -94,7 +100,7 @@ while True:
     # * Prints the current description (the textwrap module might be useful here).
     # * Waits for user input and decides what to do.
     #
-    # If the user enters a cardinal direction, attempt to move to the room there.
+    # If the user enters a cardinal command, attempt to move to the room there.
     # Print an error message if the movement isn't allowed.
     #
     # If the user enters "q", quit the game.

@@ -12,8 +12,11 @@ class Room:
     def __str__(self):
         item_string = ""
         for items in self.items:
-            item_string += items
-        return f"{self.location}. {self.description}."
+            item_string += str(items)
+        return f"{self.location}. {self.description}. ITEMS HERE: {item_string}"
 
     def add_items_to_room(self, item):
         self.items.append(item)
+
+    def remove_items_in_room(self, item):
+        self.items.remove(item)
