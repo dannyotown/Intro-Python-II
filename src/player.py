@@ -10,7 +10,7 @@ class Player:
         currentInv = ""
         for item in self.inventory:
             currentInv += str(item)
-        return f"{self.name}, you are now at {self.room}. Items: {currentInv}"
+        return f"{self.name}, you are now at {self.room}. Your Inventory: {currentInv}"
 
     def add_items(self, item):
         self.inventory.append(item)
