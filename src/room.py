@@ -7,6 +7,10 @@ class Room:
     def __init__(self, location, description):
         self.location = location
         self.description = description
+        self.n_to = None
+        self.s_to = None
+        self.e_to = None
+        self.w_to = None
         self.items = []
 
     def __str__(self):

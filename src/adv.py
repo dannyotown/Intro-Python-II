@@ -25,11 +25,8 @@ to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""")
 }
-
-
-# Link rooms together
 
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
@@ -39,6 +36,9 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+
+
+# Link rooms together
 
 #
 # Main
@@ -68,29 +68,8 @@ while True:
         if command == 'f':
             player1.room.add_items_to_room(items['sword'])
             player1.remove_items(items['sword'])
-        if command == 't':
-            player1.room.remove_items_in_room(items['sword'])
-            player1.add_items(items['sword'])
-        elif command == 'n':
-            if hasattr(player1.room, 'n_to'):
-                player1.room = player1.room.n_to
-            else:
-                print('you cannot move with this command')
-        elif command == 'e':
-            if hasattr(player1.room, 'e_to'):
-                player1.room = player1.room.e_to
-            else:
-                print('you cannot move with this command')
-        elif command == 's':
-            if hasattr(player1.room, 's_to'):
-                player1.room = player1.room.s_to
-            else:
-                print('you cannot move with this command')
-        elif command == 'w':
-            if hasattr(player1.room, 'w_to'):
-                player1.room = player1.room.w_to
-            else:
-                print('you cannot move this command')
+        if command == 's' or command == 'n' or command == 'e' or command == 'w':
+            player1.move(command)
     except ValueError:
         print('Error')
 

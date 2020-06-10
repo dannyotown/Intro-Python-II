@@ -17,3 +17,10 @@ class Player:
 
     def remove_items(self, item):
         self.inventory.remove(item)
+
+    def move(self, direction):
+        if getattr(self.room, f"{direction}_to") is not None:
+            self.room = getattr(
+                self.room, f"{direction}_to")
+        else:
+            print("You Cannot Move In That Direction")
