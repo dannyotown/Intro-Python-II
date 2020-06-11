@@ -4,7 +4,7 @@ class Player:
     def __init__(self, room, name, inventory):
         self.name = name
         self.room = room
-        self.inventory = [inventory]
+        self.inventory = inventory
 
     def __str__(self):
         currentInv = ""

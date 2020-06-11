@@ -11,21 +11,21 @@ items = {
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", []),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", [items['dagger']]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", []),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", []),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""")
+earlier adventurers. The only exit is to the south.""", [])
 }
 
 room['outside'].n_to = room['foyer']
@@ -56,7 +56,7 @@ room['treasure'].s_to = room['narrow']
 #     print('You Cannot Go This command')
 
 player_name = input('Please Enter Your Name:')
-player1 = Player(room['outside'], player_name, items['sword'])
+player1 = Player(room['outside'], player_name, [items['sword']])
 while True:
     try:
         print(player1)
@@ -66,8 +66,14 @@ while True:
             print('Thanks For Playing')
             break
         if command == 'f':
-            player1.room.add_items_to_room(items['sword'])
-            player1.remove_items(items['sword'])
+            drop_cmd = input(
+                'Which Item Did You Want To Drop?').lower()
+            player1.room.add_items_to_room(items[drop_cmd])
+            player1.remove_items(items[drop_cmd])
+        if command == 't':
+            pick_up_cmd = input('Which Item Did You Want To Pick Up?').lower()
+            player1.room.remove_items_in_room(items[pick_up_cmd])
+            player1.add_items(items[pick_up_cmd])
         if command == 's' or command == 'n' or command == 'e' or command == 'w':
             player1.move(command)
     except ValueError:
