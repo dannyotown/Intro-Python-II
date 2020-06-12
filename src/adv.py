@@ -68,7 +68,7 @@ while True:
         if command == 'f':
             drop_cmd = input(
                 'Which Item Did You Want To Drop?').lower()
-            if items.get(drop_cmd):
+            if items.get(drop_cmd) and items[drop_cmd] in player.inventory:
                 player.remove_items(items[drop_cmd])
                 player.room.add_items_to_room(items[drop_cmd])
             else:
