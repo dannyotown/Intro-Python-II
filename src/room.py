@@ -17,7 +17,9 @@ class Room:
         item_string = ""
         for items in self.items:
             item_string += str(items)
-        return f"{self.location}. {self.description}. ITEMS HERE: {item_string}"
+        if item_string == "":
+            item_string = 'None'
+        return f"{self.location}. {self.description}.\nITEMS HERE: {item_string}"
 
     def add_items_to_room(self, item):
         self.items.append(item)

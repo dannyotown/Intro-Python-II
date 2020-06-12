@@ -47,19 +47,19 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 # player_name = input('Please Enter Your Name:')
-# player1 = Player(room['outside'], player_name)
+# player = Player(room['outside'], player_name)
 # where_to = input(
 #     '[n] for north, [s] for south, [e] for east, [w] for west:').lower()
 # if(where_to == 'n'):
-#     player1.room = room['outside'].n_to
+#     player.room = room['outside'].n_to
 # else:
 #     print('You Cannot Go This command')
 
 player_name = input('Please Enter Your Name:')
-player1 = Player(room['outside'], player_name, [items['sword']])
+player = Player(room['outside'], player_name, [items['sword']])
 while True:
     try:
-        print(player1)
+        print(player)
         command = input(
             '[n] for north, [s] for south, [e] for east, [w] for west, [f] to drop item, [t] to pick up item, [q] to exit:').lower()
         if command == 'q':
@@ -68,14 +68,20 @@ while True:
         if command == 'f':
             drop_cmd = input(
                 'Which Item Did You Want To Drop?').lower()
-            player1.room.add_items_to_room(items[drop_cmd])
-            player1.remove_items(items[drop_cmd])
+            if items.get(drop_cmd):
+                player.remove_items(items[drop_cmd])
+                player.room.add_items_to_room(items[drop_cmd])
+            else:
+                print('****************\n Item Does Not Exist \n****************')
         if command == 't':
             pick_up_cmd = input('Which Item Did You Want To Pick Up?').lower()
-            player1.room.remove_items_in_room(items[pick_up_cmd])
-            player1.add_items(items[pick_up_cmd])
+            if items[pick_up_cmd] in player.room.items:
+                player.room.remove_items_in_room(items[pick_up_cmd])
+                player.add_items(items[pick_up_cmd])
+            else:
+                print('****************\n Item Does Not Exist \n****************')
         if command == 's' or command == 'n' or command == 'e' or command == 'w':
-            player1.move(command)
+            player.move(command)
     except ValueError:
         print('Error')
 
